@@ -6,15 +6,18 @@
 using namespace std;
 
 DVFSFixedPower::DVFSFixedPower(const PerformanceCounters *performanceCounters, int coreRows, int coreColumns, int minFrequency, int maxFrequency, int frequencyStepSize, float perCorePowerBudget)
-	: performanceCounters(performanceCounters), coreRows(coreRows), coreColumns(coreColumns), minFrequency(minFrequency), maxFrequency(maxFrequency), frequencyStepSize(frequencyStepSize), perCorePowerBudget(perCorePowerBudget) {
-	
+	: performanceCounters(performanceCounters), coreRows(coreRows), coreColumns(coreColumns), minFrequency(minFrequency), maxFrequency(maxFrequency), frequencyStepSize(frequencyStepSize), perCorePowerBudget(perCorePowerBudget)
+{
 }
 
-std::vector<int> DVFSFixedPower::getFrequencies(const std::vector<int> &oldFrequencies, const std::vector<bool> &activeCores) {
+std::vector<int> DVFSFixedPower::getFrequencies(const std::vector<int> &oldFrequencies, const std::vector<bool> &activeCores)
+{
 	std::vector<int> frequencies(coreRows * coreColumns);
 
-	for (unsigned int coreCounter = 0; coreCounter < coreRows * coreColumns; coreCounter++) {
-		if (activeCores.at(coreCounter)) {
+	for (unsigned int coreCounter = 0; coreCounter < coreRows * coreColumns; coreCounter++)
+	{
+		if (activeCores.at(coreCounter))
+		{
 			float power = performanceCounters->getPowerOfCore(coreCounter);
 			float temperature = performanceCounters->getTemperatureOfCore(coreCounter);
 			int frequency = oldFrequencies.at(coreCounter);
@@ -29,7 +32,9 @@ std::vector<int> DVFSFixedPower::getFrequencies(const std::vector<int> &oldFrequ
 
 			int expectedGoodFrequency = PowerModel::getExpectedGoodFrequency(frequency, power, perCorePowerBudget, minFrequency, maxFrequency, frequencyStepSize);
 			frequencies.at(coreCounter) = expectedGoodFrequency;
-		} else {
+		}
+		else
+		{
 			frequencies.at(coreCounter) = minFrequency;
 		}
 	}
