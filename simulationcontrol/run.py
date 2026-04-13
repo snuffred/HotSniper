@@ -371,11 +371,11 @@ def multi_program():
 def test_static_power():
     run(['4.0GHz', 'testStaticPower', 'slowDVFS'], get_instance('parsec-blackscholes', 3, input_set='simsmall'))
 
-# def ondemand_demo():
-# run([’{:.1f}GHz’.format(4), ’ondemand’, ’fastDVFS’], get_instance(’parsec- blackscholes’, 3, input_set=’simsmall’))
+def ondemand_demo():
+    run(['{:.1f}GHz'.format(4), 'ondemand', 'fastDVFS'], get_instance('parsec-blackscholes', 3, input_set='simsmall'))
 
-#def coldestcore_demo():
-# run([’{:.1f}GHz’.format(2.4), ’maxFreq’, ’slowDVFS’, ’coldestCore’], get_instance(’parsec-blackscholes’, 3, input_set=’simsmall’))
+def coldestcore_demo():
+    run(['{:.1f}GHz'.format(2.4), 'maxFreq', 'slowDVFS', 'coldestCore'], get_instance('parsec-blackscholes', 3, input_set='simsmall'))
 
 def main():
     example()
